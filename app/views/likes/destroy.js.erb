@@ -1,0 +1,3 @@
+$("#like_form").html("<%= escape_javascript(render('reviews/like')) %>");
+$("#like-number").html('<%= @review.likes.count %>');
+$("#like-color").attr("style","color: #9b9b9b;");

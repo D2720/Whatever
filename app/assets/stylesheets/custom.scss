@@ -205,7 +205,7 @@ header.sticky{
 
 .hidden-menu{
     position: fixed;
-    z-index: 100;
+    z-index: 1000000000000;
     top: 0;
     right: 0;
     height: 100vh;
@@ -1229,6 +1229,7 @@ footer .small-footer span a{
                     li{
                         list-style: none;
                         color: #9b9b9b;
+                        margin: 0 5px;
                     }
                 }
                 .reviewUser-info-time{

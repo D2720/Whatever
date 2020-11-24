@@ -1,0 +1,10 @@
+<% if logged_in? %>
+    <% pre_like = @review.likes.find { |like| like.user_id == current_user.id} %>
+    <div id="like_form">
+	    <% if pre_like %>
+		    <%= render 'unlike' %>
+	    <% else %>
+            <%= render 'like' %>
+        <% end %>
+    </div>
+<% end %>

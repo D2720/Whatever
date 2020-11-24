@@ -1,3 +1,4 @@
+<%= javascript_include_tag Ckeditor.cdn_url %>
 <%= form_for(@review) do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
   <div class="field">
@@ -8,7 +9,7 @@
     <%= f.text_area :description, placeholder: "Compose descritpion..." , id: "content" %>
   
     <%= f.label t('form.label.content') %>
-    <%= f.text_area :content, placeholder: "Compose content..." , id: "content" %>
+    <%= f.text_area :content, placeholder: "Compose content..." , id: "content", class: "ckeditor" %>
 
     <%= f.label t('form.label.select_picture') %>
 	  <%= f.file_field :image, accept: "image/jpeg,image/gif,image/png" , class: "img-buttom" %>
@@ -25,4 +26,29 @@
     alert("Maximum file size is 5MB. Please choose a smaller file.");
     }
   });
+</script>
+<script type="text/javascript">
+  CKEDITOR.editorConfig = function( config ) {
+    config.language = 'en';
+    config.uiColor = '#ffffff';
+
+    config.filebrowserBrowseUrl = "/ckeditor/attachment_files";
+    config.filebrowserFlashBrowseUrl = "/ckeditor/attachment_files";
+    config.filebrowserFlashUploadUrl = "/ckeditor/attachment_files";
+    config.filebrowserImageBrowseLinkUrl = "/ckeditor/pictures";
+    config.filebrowserImageBrowseUrl = "/ckeditor/pictures";
+    config.filebrowserImageUploadUrl = "/ckeditor/pictures?";
+    config.filebrowserUploadUrl = "/ckeditor/attachment_files";
+    config.font_defaultLabel = 'Arial';
+    config.fontSize_defaultLabel = 30;
+    config.allowedContent = true;
+
+    config.toolbar = [
+      { name: 'document', groups: [ 'mode', 'document', 'doctools' ], items: [ 'Source'] },
+      { name: 'clipboard', groups: [ 'clipboard', 'undo' ], items: [ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo' ] },
+      { name: 'links', items: [ 'Link', 'Unlink', 'Anchor' ] },
+      { name: 'insert', items: [ 'Image', 'Flash', 'Table', 'HorizontalRule', 'SpecialChar' ] },
+
+    ];
+  };
 </script>

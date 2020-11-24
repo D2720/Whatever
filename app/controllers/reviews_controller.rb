@@ -4,8 +4,8 @@ class ReviewsController < ApplicationController
 	before_action :correct_user, only: :destroy
 
 	def new
-	      @review = current_user.reviews.build
-	      @feed_items = current_user.feed.paginate(page: params[:page]).per_page(10)
+	    @review = current_user.reviews.build
+	    @feed_items = current_user.feed.paginate(page: params[:page]).per_page(10)
 	end
 
 	def create
@@ -44,6 +44,17 @@ class ReviewsController < ApplicationController
 			format.html {}
 			format.json
 		end
+	end
+	
+	def like
+		@review = Review.all.find(params[:id])
+		Like.create(user_id: current_user.id, review_id: @review.id)
+		redirect_to review_path(@review)
+	end
+
+	def unlike
+		@review = Review.find(params[:id])
+		current_user.likes.find_by(review_id: @review.id).destroy
 	end
 
 	private

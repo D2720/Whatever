@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  mount Ckeditor::Engine => '/ckeditor'
   root 'static_pages#home'
   get 'sessions/new'
   get 'users/new'
@@ -21,6 +22,7 @@ Rails.application.routes.draw do
   resources :reviews, only: [:create, :destroy, :show, :new, :index] do
     collection { get :search, to: 'reviews#index' }
     resources :comments, only: [:index, :create]
+    resources :likes
   end
   resources :products do
     resources :requests
